@@ -11,7 +11,7 @@ import { Loader } from './components/Loader';
 import { Todo } from './types/Todo';
 import { getTodos } from './api';
 
-export enum completedStates {
+export enum CompletedStates {
   Completed = 'completed',
   Active = 'active',
   All = 'all',
@@ -19,14 +19,14 @@ export enum completedStates {
 
 const filterTodos = (
   todos: Todo[],
-  completeState: completedStates,
+  completeState: CompletedStates,
   searchQuery: string,
 ): Todo[] => {
   let filteredTodos = todos;
 
-  if (completeState !== completedStates.All) {
+  if (completeState !== CompletedStates.All) {
     filteredTodos = filteredTodos.filter(todo => {
-      if (completeState === completedStates.Active) {
+      if (completeState === CompletedStates.Active) {
         return !todo.completed;
       } else {
         return todo.completed;
@@ -46,8 +46,8 @@ const filterTodos = (
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [stateForFilter, setStateForFilter] = useState<completedStates>(
-    completedStates.All,
+  const [stateForFilter, setStateForFilter] = useState<CompletedStates>(
+    CompletedStates.All,
   );
   const [query, setQuery] = useState('');
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);

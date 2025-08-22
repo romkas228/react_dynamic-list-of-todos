@@ -1,9 +1,9 @@
-import { completedStates } from '../../App';
+import { CompletedStates } from '../../App';
 
 type Props = {
   setQuery: (query: string) => void;
-  setFilter: (filter: completedStates) => void;
-  filter: completedStates;
+  setFilter: (filter: CompletedStates) => void;
+  filter: CompletedStates;
   query: string;
 };
 
@@ -21,12 +21,12 @@ export const TodoFilter: React.FC<Props> = ({
             data-cy="statusSelect"
             value={filter}
             onChange={event => {
-              setFilter(event.target.value as completedStates);
+              setFilter(event.target.value as CompletedStates);
             }}
           >
-            <option value={completedStates.All}>All</option>
-            <option value={completedStates.Active}>Active</option>
-            <option value={completedStates.Completed}>Completed</option>
+            <option value={CompletedStates.All}>All</option>
+            <option value={CompletedStates.Active}>Active</option>
+            <option value={CompletedStates.Completed}>Completed</option>
           </select>
         </span>
       </p>
