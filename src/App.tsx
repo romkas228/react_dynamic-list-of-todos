@@ -51,10 +51,12 @@ export const App: React.FC = () => {
   );
   const [query, setQuery] = useState('');
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     getTodos()
       .then(setTodos)
+      .catch(err => setError(err.message))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -79,15 +81,16 @@ export const App: React.FC = () => {
             </div>
 
             <div className="block">
-              {isLoading ? (
-                <Loader />
-              ) : (
-                <MemoTodoList
-                  todos={filteredTodos}
-                  setSelectedTodo={setSelectedTodo}
-                  selectedTodo={selectedTodo}
-                />
+              {isLoading && <Loader />}
+              {!isLoading && error && (
+                <p className='error'>{error}</p>
               )}
+              {!isLoading && !error && <MemoTodoList
+                todos={filteredTodos}
+                setSelectedTodo={setSelectedTodo}
+                selectedTodo={selectedTodo}
+              />}
+
             </div>
           </div>
         </div>

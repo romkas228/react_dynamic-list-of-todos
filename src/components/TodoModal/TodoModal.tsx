@@ -17,10 +17,11 @@ export const TodoModal: React.FC<Props> = ({
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
+    setUser(null);
     getUser(selectedTodo.userId)
       .then(setUser)
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [selectedTodo]);
 
   return (
     <div className="modal is-active" data-cy="modal">
